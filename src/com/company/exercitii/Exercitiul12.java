@@ -37,7 +37,8 @@ public class Exercitiul12 {
                     "2.Write a Java program to calculate the average value of array elements\n" +
                     "3.Write a Java program to remove a specific element from an array. Also change the size of the array\n" +
                     "4.Write a Java program to insert an element (specific position) into an array\n\n" +
-                    "0.Exit\n");
+                    "5.Write a Java program to find the second largest element in an array.\n" + "0.Exit\n" +
+                    "6.Write a Java program to find the number of even and odd integers in a given array of integers\n");
             System.out.println("Select an option ");
             optiune = Integer.parseInt(input.next());
 
@@ -54,12 +55,18 @@ public class Exercitiul12 {
                 case 4:
                     punctul4(input);
                     break;
+                case 5:
+                    punctul5(input);
+                    break;
+                case 6:
+                    punctul6(input);
                 case 0:
                     break;
                 default:
-                    System.out.println("Optiune incorecta\n"); continue;
+                    System.out.println("Optiune incorecta\n");
+                    continue;
             }
-        }while (optiune != 0);
+        } while (optiune != 0);
     }
 
     //Write a Java program to sum values of an array. Read the size and read the numbers
@@ -108,6 +115,20 @@ public class Exercitiul12 {
         printArray(array);
     }
 
+    public static void punctul5(Scanner input) {
+        System.out.println("Dati dimensiunea array-ului : ");
+        int dim = input.nextInt();
+        int[] array = readArray(input, dim);
+        System.out.println(largestNumber(extractElement(array, largestNumber(array))));
+    }
+    public static void punctul6(Scanner input) {
+        System.out.println("Dati dimensiunea array-ului : ");
+        int dim = input.nextInt();
+        int[] array = readArray(input, dim);
+        System.out.println("Numere pare : " + countEven(array));
+        System.out.println("Numere impare : " + countOdd(array));
+    }
+
     //Write a Java program to insert an element (specific position) into an array
     public static int[] addPosition(int[] array, int index, int value) {
         int[] newArray = new int[array.length + 1];
@@ -123,6 +144,30 @@ public class Exercitiul12 {
         return newArray;
     }
 
+    public static int largestNumber(int[] array) {
+        int maxValue = Integer.MIN_VALUE;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > maxValue) {
+                maxValue = array[i];
+            }
+        }
+        return maxValue;
+    }
+
+    public static int[] extractElement(int[] array, int value) {
+        int[] newArray = new int[array.length - 1];
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == value) {
+                continue;
+            } else {
+                newArray[count] = array[i];
+                count++;
+            }
+        }
+        return newArray;
+    }
+
     public static int[] readArray(Scanner input, int size) {
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
@@ -131,6 +176,7 @@ public class Exercitiul12 {
         }
         return array;
     }
+
 
     public static int sumArray(int[] array) {
         int sum = 0;
@@ -160,5 +206,19 @@ public class Exercitiul12 {
             }
         }
         return newArray;
+    }
+
+    //Write a Java program to find the number of even and odd integers in a given array of integers
+    public static int countEven(int[] array) {
+        int even = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                even++;
+            }
+        }
+        return even;
+    }
+    public static int countOdd(int[] array) {
+        return array.length - countEven(array);
     }
 }
