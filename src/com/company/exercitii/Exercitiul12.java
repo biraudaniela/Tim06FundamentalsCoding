@@ -24,6 +24,7 @@ Read a sequence of numbers from the keyboard separated by ;. Print the new numbe
 Read a big number from the keyboard (let’ say 20 digits). Compute the division by a one digit number.
 */
 
+import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
 public class Exercitiul12 {
@@ -54,7 +55,9 @@ public class Exercitiul12 {
                     punctul4(input);
                     break;
                 case 0:
-
+                    break;
+                default:
+                    System.out.println("Optiune incorecta\n"); continue;
             }
         }while (optiune != 0);
     }
