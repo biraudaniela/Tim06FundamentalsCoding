@@ -27,42 +27,135 @@ Read a big number from the keyboard (let’ say 20 digits). Compute the division
 import java.util.Scanner;
 
 public class Exercitiul12 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Punct1(input);
-        Punct2(input);
+        int optiune;
+        do {
 
+            System.out.println("1.Write a Java program to sum values of an array. Read the size and read the numbers\n" +
+                    "2.Write a Java program to calculate the average value of array elements\n" +
+                    "3.Write a Java program to remove a specific element from an array. Also change the size of the array\n" +
+                    "4.Write a Java program to insert an element (specific position) into an array\n\n" +
+                    "0.Exit\n");
+            System.out.println("Select an option ");
+            optiune = Integer.parseInt(input.next());
+
+            switch (optiune) {
+                case 1:
+                    punctul1(input);
+                    break;
+                case 2:
+                    punctul2(input);
+                    break;
+                case 3:
+                    punctul3(input);
+                    break;
+                case 4:
+                    punctul4(input);
+                    break;
+                case 0:
+
+            }
+        }while (optiune != 0);
     }
+
     //Write a Java program to sum values of an array. Read the size and read the numbers
-    public static void Punct1( Scanner input){
+    public static void punctul1(Scanner input) {
         System.out.println("Dimensiune array : ");
         int dim = input.nextInt();
-        int[] array = readArray(dim);
+        int[] array = readArray(input, dim);
         System.out.println("Suma elementelor din array : " + sumArray(array));
     }
+
     // Write a Java program to calculate the average value of array elements
-    public static void Punct2(Scanner input){
-        System.out.println("Dimensiune array : " );
+    public static void punctul2(Scanner input) {
+        System.out.println("Dimensiune array : ");
         int dim = input.nextInt();
-        int[] array = readArray(dim);
+        int[] array = readArray(input, dim);
         int medie = sumArray(array) / dim;
         System.out.println(medie);
 
     }
-    public static int[] readArray(int size){
-        Scanner input = new Scanner(System.in);
+
+    public static void punctul3(Scanner input) {
+        System.out.println("Dati dimensiune : ");
+        int dim = input.nextInt();
+        int[] array = readArray(input, dim);
+        System.out.println("Dimensiune array " + array.length);
+        printArray(array);
+        System.out.println("Dati index element :");
+        int index = input.nextInt();
+        array = extractPosition(array, index);
+        System.out.println("Dimensiunea finala : " + array.length);
+        printArray(array);
+    }
+
+    public static void punctul4(Scanner input) {
+        System.out.println("Dati dimensiune, pct 4 : ");
+        int dim = input.nextInt();
+        int[] array = readArray(input, dim);
+        System.out.println("Dimensiune initiala " + array.length);
+        printArray(array);
+        System.out.println("Dati index element :");
+        int index = input.nextInt();
+        System.out.println("Dati valoarea");
+        int value = input.nextInt();
+        array = addPosition(array, index, value);
+        System.out.println("Dimensiunea finala : " + array.length);
+        printArray(array);
+    }
+
+    //Write a Java program to insert an element (specific position) into an array
+    public static int[] addPosition(int[] array, int index, int value) {
+        int[] newArray = new int[array.length + 1];
+        int k = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (i == index) {
+                newArray[k] = value;
+                k++;
+            }
+            newArray[k] = array[i];
+            k++;
+        }
+        return newArray;
+    }
+
+    public static int[] readArray(Scanner input, int size) {
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
-            System.out.println("Array["+ (i+1) + "]=" );
+            System.out.println("Array[" + (i + 1) + "]=");
             array[i] = input.nextInt();
         }
         return array;
     }
-    public static int sumArray(int[] array){
-        int sum =0;
+
+    public static int sumArray(int[] array) {
+        int sum = 0;
         for (int i = 0; i < array.length; i++) {
             sum = sum + array[i];
         }
         return sum;
+    }
+
+    public static int[] printArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.println(array[i] + " ");
+
+        }
+        return array;
+    }
+
+    public static int[] extractPosition(int[] array, int index) {
+        int[] newArray = new int[array.length - 1];
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (i == index) {
+                continue;
+            } else {
+                newArray[count] = array[i];
+                count++;
+            }
+        }
+        return newArray;
     }
 }
